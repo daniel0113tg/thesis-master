@@ -97,8 +97,8 @@ def test_one_file(path_to_videos, video_id, groundtruth_file, timesteps, image_d
 
         # get the CNN features Cuesiton
         X = []
-        print(enumerate(windows_ndx))
-        a, b = windows_ndx.shape
+        print(enumerate(window_ndx))
+        a, b = window_ndx.shape
         print("a")
         print( a)
         print("b")
