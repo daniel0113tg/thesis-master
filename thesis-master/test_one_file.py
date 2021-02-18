@@ -103,11 +103,10 @@ def test_one_file(path_to_videos, video_id, groundtruth_file, timesteps, image_d
             print(len(dt))    # has shape (timesteps, CNN feature vector length)
             X.append(dt[0, ...])
         X = np.array(X)
-
-        # package the input data as a batch of size 1
-        X = np.expand_dims(X, axis=1)       # a batch of 1, adding an extra dimension
         a, b = X.shape
         X = X.reshape(a, b, 1)
+        # package the input data as a batch of size 1
+        X = np.expand_dims(X, axis=1)       # a batch of 1, adding an extra dimension
         # process...
         answer = model.predict(X)
 
