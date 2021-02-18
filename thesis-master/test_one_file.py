@@ -171,7 +171,7 @@ if __name__ == "__main__":
 
     image_data_shape = (args.imwidth, args.imheight, 3)                         # image width, image height, channels
     video_clip_data_shape = (args.timesteps, args.imwidth, args.imheight, 3)    # timesteps, image width, image height, channels
-    rnn_input_shape = (args.timesteps, 1000) if args.fc1_layer else (args.timesteps, 7, 7, 512)    # timesteps, CNN features width, CNN features height, CNN features channels
+    rnn_input_shape = (args.timesteps, 4096) if args.fc1_layer else (args.timesteps, 7, 7, 512)    # timesteps, CNN features width, CNN features height, CNN features channels
 
     t = pytictoc.TicToc()
     t.tic()
