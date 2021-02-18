@@ -99,10 +99,6 @@ def test_one_file(path_to_videos, video_id, groundtruth_file, timesteps, image_d
         X = []
         print(enumerate(window_ndx))
         print(type(window_ndx))
-        print("a")
-        print( a)
-        print("b")
-        print (b)
         for (j, ndx) in enumerate(window_ndx):
             print(type)
             print(ndx)
