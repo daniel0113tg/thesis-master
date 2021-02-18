@@ -104,6 +104,8 @@ def test_one_file(path_to_videos, video_id, groundtruth_file, timesteps, image_d
         print("b")
         print (b)
         for (j, ndx) in enumerate(window_ndx):
+            print(type)
+            print(ndx)
             dt = np.load(cnn_files[ndx])
             dt = np.array(dt['X']) 
             a, b = dt.shape
