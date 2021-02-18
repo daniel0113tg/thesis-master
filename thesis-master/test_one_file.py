@@ -106,7 +106,8 @@ def test_one_file(path_to_videos, video_id, groundtruth_file, timesteps, image_d
 
         # package the input data as a batch of size 1
         X = np.expand_dims(X, axis=1)       # a batch of 1, adding an extra dimension
-        X = X.reshape(X.shape[0],X.shape[1])
+        a, b = X.shape
+        X = X.reshape(a, b, 1)
         # process...
         answer = model.predict(X)
 
