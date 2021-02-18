@@ -99,9 +99,15 @@ def test_one_file(path_to_videos, video_id, groundtruth_file, timesteps, image_d
         X = []
         for (j, ndx) in enumerate(window_ndx):
             dt = np.load(cnn_files[ndx])
-            dt = np.array(dt['X'])      
+            dt = np.array(dt['X']) 
+            a, b = dt.shape
+            print("a")
+            print( a)
+            print("b")
+            print (b)
             print(len(dt))    # has shape (timesteps, CNN feature vector length)
             X.append(dt[0, ...])
+        print(X)
         X = np.array(X)
         a, b = X.shape
         print("a")
