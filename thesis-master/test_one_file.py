@@ -95,7 +95,7 @@ def test_one_file(path_to_videos, video_id, groundtruth_file, timesteps, image_d
         window_ndx = [0 if i < 0 else i for i in window_ndx]        # take care of loop boundary conditions
         window_ndx = [len(frame_numbers) - 1 if i >= len(frame_numbers) else i for i in window_ndx]  # take care of loop boundary conditions
 
-        # get the CNN features 
+        # get the CNN features Cuesiton
         X = []
         for (j, ndx) in enumerate(window_ndx):
             dt = np.load(cnn_files[ndx])
@@ -104,7 +104,9 @@ def test_one_file(path_to_videos, video_id, groundtruth_file, timesteps, image_d
             X.append(dt[0, ...])
         X = np.array(X)
         a, b = X.shape
+        print("a")
         print( a)
+        print("b")
         print (b)
         # package the input data as a batch of size 1
         X = np.expand_dims(X, axis=1)       # a batch of 1, adding an extra dimension
