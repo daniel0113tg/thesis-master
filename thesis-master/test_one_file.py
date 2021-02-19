@@ -100,8 +100,11 @@ def test_one_file(path_to_videos, video_id, groundtruth_file, timesteps, image_d
         print(enumerate(window_ndx))
         print(type(window_ndx))
         for (j, ndx) in enumerate(window_ndx):
-            print("esto es type y ndx")
-            print(ndx)
+            a,b = cnn_files[ndx].shape
+            print("a")
+            print(a)
+            print("b")
+            print(b)
             dt = np.load(cnn_files[ndx])
             dt = np.array(dt['X']) 
    # has shape (timesteps, CNN feature vector length)
