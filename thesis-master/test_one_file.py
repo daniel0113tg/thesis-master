@@ -103,7 +103,8 @@ def test_one_file(path_to_videos, video_id, groundtruth_file, timesteps, image_d
 
             print(cnn_files[ndx])
             dt = np.load(cnn_files[ndx])
-            dt = np.array() 
+            print(dt)
+            dt = np.array(dt['X']) 
    # has shape (timesteps, CNN feature vector length)
             X.append(dt[0, ...])
         X = np.array(X)
