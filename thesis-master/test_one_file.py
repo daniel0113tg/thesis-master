@@ -43,7 +43,7 @@ def test_one_file(path_to_videos, video_id, groundtruth_file, timesteps, image_d
     model = create_neural_net_model(image_data_shape, video_data_shape, rnn_input_shape,
             include_convolutional_base=False, include_cnn_fc1_layer=include_cnn_fc1_layer, include_top_layers=True, rnn_model_weights_file=model_weights_file)
 
-    # open and load the groundtruth data
+    # open and load the groundtruth datass
     print('aqui')
     print('Loading groundtruth data...')
     gt = pd.read_csv(groundtruth_file, delim_whitespace=True, header=None, names=['video_id', 'frame_id', 'gt'])
@@ -100,23 +100,13 @@ def test_one_file(path_to_videos, video_id, groundtruth_file, timesteps, image_d
         print(enumerate(window_ndx))
         print(type(window_ndx))
         for (j, ndx) in enumerate(window_ndx):
-            print(type)
+            print("esto es type y ndx")
             print(ndx)
             dt = np.load(cnn_files[ndx])
             dt = np.array(dt['X']) 
-            a, b = dt.shape
-            print("a")
-            print( a)
-            print("b")
-            print (b)
-            print(len(dt))    # has shape (timesteps, CNN feature vector length)
+   # has shape (timesteps, CNN feature vector length)
             X.append(dt[0, ...])
         X = np.array(X)
-        a, b = X.shape
-        print("a")
-        print( a)
-        print("b")
-        print (b)
         # package the input data as a batch of size 1
         X = np.expand_dims(X, axis=1)       # a batch of 1, adding an extra dimension
         # process...
