@@ -121,7 +121,7 @@ def test_one_file(path_to_videos, video_id, groundtruth_file, timesteps, image_d
         print(pred_labels[-1], end='', flush=True)
     print('\n\n')
     assert len(pred_labels) == len(gt_labels) == len(pred_prob) == len(pred_probs), 'logical error during prediction stage!!'
-    print("LABELS\")
+    print("LABELS\n")
     print(pred_labels)
     print("\n")
     # visualise the groundtruth & the predictions
