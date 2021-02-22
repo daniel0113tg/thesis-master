@@ -109,7 +109,8 @@ def test_one_file(path_to_videos, video_id, groundtruth_file, timesteps, image_d
         X = np.expand_dims(X, axis=0)       # a batch of 1, adding an extra dimension
         # process...
         answer = model.predict(X)
-
+        
+        print(answer)
         # find the maximum of the predictions (& decode from one-hot-encoding for groundthruth labels)
         for batch_i in range(0, len(answer)):     # we have an answer for each batch (1 answer in this case)
             predicted_class = np.argmax(answer[batch_i])
@@ -120,7 +121,9 @@ def test_one_file(path_to_videos, video_id, groundtruth_file, timesteps, image_d
         print(pred_labels[-1], end='', flush=True)
     print('\n\n')
     assert len(pred_labels) == len(gt_labels) == len(pred_prob) == len(pred_probs), 'logical error during prediction stage!!'
-  
+    print("LABELS\")
+    print(pred_labels)
+    print("\n")
     # visualise the groundtruth & the predictions
     fig1 = visualise_labels(gt_labels, 'groundtruth for video {}'.format(video_id))
     if output_path:
@@ -145,6 +148,15 @@ def test_one_file(path_to_videos, video_id, groundtruth_file, timesteps, image_d
         for k in range(len(frame_numbers)):
             results_file.write('%s,%d,%s,%s,%f,%f,%f,%f,%s\n' % (video_id, frame_numbers[k], gt_labels[k], pred_labels[k], pred_prob[k], 
                                 pred_probs[k,0], pred_probs[k,1], pred_probs[k,2], ' ' if gt_labels[k] == pred_labels[k] else '*WRONG*'))
+        results_file.close()
+
+        # save results to file
+    if output_path:
+        results_file = open(os.path.join(output_path, video_id+'_signing.txt'), 'w')
+        results_file.write('video_id,frame_number,predicted_label,\n')
+        for k in range(len(frame_numbers)):
+            if(pred_labels[k] == "S"):
+                results_file.write('%s,%d,%s\n' % (video_id, frame_numbers[k], pred_labels[k]))
         results_file.close()
 
     print('\nready')
