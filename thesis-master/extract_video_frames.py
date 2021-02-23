@@ -54,10 +54,12 @@ def extract_video_frames(input_path, output_path, resize_shape, output_fps, max_
                     #frameId = video.get(1)
 
                     if save_count > max_frames_per_video:
+                        print(save_count, max_frames_per_video)
                         break
 
                     success, image = video.read()
                     if success is False:
+                        print("no leyo el video")
                         break
 
                     if frame_count % read_step == 0:         # save every Nth frame
