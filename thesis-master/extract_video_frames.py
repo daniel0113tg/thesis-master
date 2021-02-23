@@ -58,6 +58,7 @@ def extract_video_frames(input_path, output_path, resize_shape, output_fps, max_
                         break
 
                     success, image = video.read()
+                    print(video.read())
                     if success is False:
                         print("no leyo el video")
                         break
