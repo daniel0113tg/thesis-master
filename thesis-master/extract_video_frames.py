@@ -50,6 +50,7 @@ def extract_video_frames(input_path, output_path, resize_shape, output_fps, max_
                 frame_count = 0
                 save_count = 0
                 while video.isOpened():
+                    print("abbierto")
                     #frameId = video.get(1)
 
                     if save_count > max_frames_per_video:
@@ -63,7 +64,7 @@ def extract_video_frames(input_path, output_path, resize_shape, output_fps, max_
                         if image is not None:
                             image = cv2.resize(image, resize_shape, interpolation = cv2.INTER_AREA)
                         filename = os.path.join(output_video_dir, str(int(frame_count)) + ".jpg")
-                        #print(filename)
+                        print(filename)
                         cv2.imwrite(filename,image)
                         save_count += 1
                     frame_count += 1

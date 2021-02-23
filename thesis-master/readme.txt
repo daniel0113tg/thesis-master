@@ -31,7 +31,14 @@ Usage is as follows:
 		
 Downloading of the videos is done via a call to:
 		python3  download_youtube_video_list.py  --urls="vetted_video_urls.txt" --output=\sld\videos
-		python3  download_a_single_youtube_video.py  --url="https://www.youtube.com/watch?v=-FSPre_AG4k" --output=\sld\videos
+		python3  download_a_single_youtube_video.py  --url="https://www.youtube.com/watch?v=3DEzJTxxmlM" --output=sld/videos
+
+python3  download_a_single_youtube_video.py  --url="https://www.youtube.com/watch?v=PwXBwV1YJ-s" --output=sld/videos
+
+python3  download_a_single_youtube_video.py  --url="https://www.youtube.com/watch?v=sMtxcmyS330" --output=sld/videos
+
+
+
 		
 The download script (like many of the other scripts) can be run multiple times, and it will only download videos that have not been downloaded before. 
 So one could run download_youtube_video_list.py and terminate it half way (by pressing 'q' to quit the process). Then one can restart the script and it
@@ -50,7 +57,7 @@ Once the videos are downloaded, then raw video frames and motion data can be ext
 
 Usage is as follows:
 
-	python extract_video_frames.py --input=\sld\videos --output=\sld\frames  --max-frames=2000  --fps=5
+	python3 extract_video_frames.py --input=sld/videos --output=sld/frames  --max-frames=2000  --fps=5
 	
 	python extract_video_frame_differences.py --input=\sld\videos  --output=\sld\diff  --max-frames=2000  --fps=5  --diff=10  --gray=True
 	
@@ -79,7 +86,7 @@ the first convolutional layer of VGG-16 to handle such an input with more than 3
 
 Usage is as follows:
 
-	python generate_CNN_features.py --input=\sld\frames --output=\sld\frames_cnnfc1 --groundtruth=\sld\groundtruth.txt  --fc1_layer=True
+	python3 generate_CNN_features.py --input=sld/frames --output=sld/frames_cnnfc1 --groundtruth=sld/groundtruth.txt  --fc1_layer=True
 	
 	python generate_CNN_features.py --input=\sld\diff  --output=\sld\diff_cnnfc1  --groundtruth=\sld\groundtruth.txt  --fc1_layer=True
 	
