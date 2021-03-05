@@ -309,6 +309,7 @@ if __name__ == "__main__":
     argparser.add_argument("--timesteps", help="Timesteps used in the RNN model. Will depend on the timesteps of the trained RNN model.", default=20)
     argparser.add_argument("--model", help="File path and filename for the trained RNN model weights. File name should be *.h5", default="")
     argparser.add_argument("--video_id", help="The ID of the video to process. Should be a sub-folder of the path given by parameter 'videos'", default="")
+    argparser.add_argument("--gt", help="Path to the groundtruth file", default="")
 
     args = argparser.parse_args()
 
