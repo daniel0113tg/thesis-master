@@ -14,6 +14,7 @@ import glob
 import argparse
 import pytictoc
 import numpy as np
+from PIL import Image
 from keras import preprocessing
 from keras.applications.vgg16 import preprocess_input
 import common
@@ -68,7 +69,7 @@ def extract_video_frames(input_path, resize_shape, output_fps, max_frames_per_vi
                 if frame_count % read_step == 0:         # save every Nth frame
                     if video.read()[1] is not None:
                         image = cv2.resize(video.read()[1], resize_shape, interpolation = cv2.INTER_AREA)
-                        frames.append(image)
+                        frames.append(str(int(frame_count)),image)
                     save_count += 1
                 frame_count += 1
 
@@ -106,8 +107,7 @@ def generate_CNN_features( input_file_mask, cnn_model, output_path, groundtruth_
     tt.tic()
     id = 0
     for image_j in frames:
-            frame_id = id
-            print(frame_id)
+            frame_id = image_j[0]
             skip_frame = False
             try:
                 skip_frame = True if have_groundtruth_data and gt[(video_i, frame_id)] == '?' else False
@@ -118,7 +118,8 @@ def generate_CNN_features( input_file_mask, cnn_model, output_path, groundtruth_
                 print("x", end='', flush=True)
             else:
                 # load the image and convert to numpy 3D array
-                img = np.array(preprocessing.image.load_img(image_j))
+                img_array = Image.fromarray(image_j[1])
+                img = np.array(preprocessing.image.load_img(img)
 
                 # Note that we don't scale the pixel values because VGG16 was not trained with normalised pixel values!
                 # Instead we use the pre-processing function that comes specifically with the VGG16
