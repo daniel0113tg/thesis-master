@@ -105,7 +105,7 @@ def generate_CNN_features( input_file_mask, cnn_model, output_path, groundtruth_
 
     tt.tic()
     for image_j in frames:
-            frame_id = int(image_j)[0])
+            frame_id = int((image_j)[0])
             print(frame_id)
             skip_frame = False
             try:
