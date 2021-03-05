@@ -56,7 +56,6 @@ def extract_video_frames(input_path, resize_shape, output_fps, max_frames_per_vi
             frame_count = 0
             save_count = 0
             while video.isOpened():
-                print("abbierto")
   
                 if save_count > max_frames_per_video:
                     print(save_count, max_frames_per_video)
@@ -106,7 +105,8 @@ def generate_CNN_features( input_file_mask, cnn_model, output_path, groundtruth_
 
     tt.tic()
     for image_j in frames:
-            frame_id = int(os.path.splitext(os.path.basename(image_j))[0])
+            frame_id = int(image_j)[0])
+            print(frame_id)
             skip_frame = False
             try:
                 skip_frame = True if have_groundtruth_data and gt[(video_i, frame_id)] == '?' else False
