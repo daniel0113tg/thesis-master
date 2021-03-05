@@ -39,7 +39,7 @@ def extract_video_frames(input_path, output_path, resize_shape, output_fps, max_
     # go through each input video
     listing = glob.glob(input_path)
     print('Processing %d video(s)...' % len(listing))
-
+    
     file_count = 1
     for file in listing:
         if os.path.isfile(file):
