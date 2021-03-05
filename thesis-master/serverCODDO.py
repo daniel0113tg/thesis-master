@@ -40,7 +40,6 @@ def extract_video_frames(input_path, output_path, resize_shape, output_fps, max_
     listing = glob.glob(input_path)
     print('Processing %d video(s)...' % len(listing))
     
-    file_count = 1
     for file in listing:
         if os.path.isfile(file):
             video = cv2.VideoCapture(file)
@@ -49,6 +48,7 @@ def extract_video_frames(input_path, output_path, resize_shape, output_fps, max_
             orig_framerate = video.get(cv2.CAP_PROP_FPS)
             total_frames = video.get(cv2.CAP_PROP_FRAME_COUNT)
             read_step = math.ceil(orig_framerate / output_fps)
+            
             print('Extracting video frames from %s ...   (%dx%d, %f fps, %d frames)' % (file,
                      int(video.get(cv2.CAP_PROP_FRAME_WIDTH)), int(video.get(cv2.CAP_PROP_FRAME_HEIGHT)),
                     orig_framerate, total_frames))
@@ -56,32 +56,30 @@ def extract_video_frames(input_path, output_path, resize_shape, output_fps, max_
             frame_count = 0
             save_count = 0
             while video.isOpened():
-                    print("abbierto")
+                print("abbierto")
   
-                    if save_count > max_frames_per_video:
-                        print(save_count, max_frames_per_video)
-                        break
+                if save_count > max_frames_per_video:
+                    print(save_count, max_frames_per_video)
+                    break
 
-                    success, image = video.read()
-                    if video.read()[0] is False:
-                        print("no leyo el video")
-                        break
-                    print(success, image)
-                    if frame_count % read_step == 0:         # save every Nth frame
-                        if video.read()[1] is not None:
-                            image = cv2.resize(video.read()[1], resize_shape, interpolation = cv2.INTER_AREA)
-                            frames.append(image)
-                        print(image)
-                        save_count += 1
-                    frame_count += 1
-                print('      ...saved %d frames' % save_count)
-                video.release()
-                print('done')
+                success, image = video.read()
+                if video.read()[0] is False:
+                    print("no leyo el video")
+                    break
+                print(success, image)
+                if frame_count % read_step == 0:         # save every Nth frame
+                    if video.read()[1] is not None:
+                        image = cv2.resize(video.read()[1], resize_shape, interpolation = cv2.INTER_AREA)
+                        frames.append(image)
+                    print(image)
+                    save_count += 1
+                frame_count += 1
+            print('      ...saved %d frames' % save_count)
+            video.release()
+            print('done')
 
-                if do_delete_processed_videos:
-                    os.remove(file)
-
-                file_count += 1
+            if do_delete_processed_videos:
+                os.remove(file)
 
 ##	python3 generate_CNN_features.py --input=sld/frames --output=sld/frames_cnnfc1 --groundtruth=sld/groundtruth.txt  --fc1_layer=True
 
