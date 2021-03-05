@@ -167,7 +167,7 @@ def visualise_labels(gt_list, title_str=""):
     return fig
 
 
-def test_one_file(path_to_videos, video_id, groundtruth_file, timesteps, image_data_shape, video_data_shape, rnn_input_shape, include_cnn_fc1_layer, model_weights_file, output_path):
+def test_one_file(video_id, groundtruth_file, timesteps, image_data_shape, video_data_shape, rnn_input_shape, include_cnn_fc1_layer, model_weights_file, output_path):
 
     # load the top RNN part of the model, without the convolutional base
     model = create_neural_net_model(image_data_shape, video_data_shape, rnn_input_shape,
