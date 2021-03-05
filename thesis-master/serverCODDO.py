@@ -54,8 +54,8 @@ def extract_video_frames(input_path, output_path, resize_shape, output_fps, max_
                     orig_framerate, total_frames))
                     
             frame_count = 0
-                save_count = 0
-                while video.isOpened():
+            save_count = 0
+            while video.isOpened():
                     print("abbierto")
   
                     if save_count > max_frames_per_video:
@@ -136,6 +136,7 @@ def generate_CNN_features(input_path, input_file_mask, cnn_model, output_path, g
     tt.toc()
     print('\n\nReady')
     
+    print(framesXCNN)
                 
 
                 
@@ -167,4 +168,4 @@ if __name__ == "__main__":
     image_data_shape = (args.imwidth, args.imheight, 3)   # width, height, channels
     model = create_cnn_model(image_data_shape, include_fc1_layer=args.fc1_layer)
 
-    generate_CNN_features(frames, input_file_mask=args.mask, cnn_model=model, output_path=args.output, groundtruth_file=args.groundtruth)
+    generate_CNN_features(input_file_mask=args.mask, cnn_model=model, output_path=args.output, groundtruth_file=args.groundtruth)
