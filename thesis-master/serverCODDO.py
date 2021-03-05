@@ -223,7 +223,7 @@ def test_one_file(video_id, groundtruth_file, timesteps, image_data_shape, video
         X = []
         for (j, ndx) in enumerate(window_ndx):
             print(cnn_files[ndx])
-            dt = np.load(cnn_files[ndx])
+            dt = cnn_files[ndx]
             print(len(dt['X']))
             dt = np.array(dt['X']) 
    # has shape (timesteps, CNN feature vector length)
