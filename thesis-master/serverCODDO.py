@@ -39,7 +39,7 @@ def extract_video_frames(input_path, output_path, resize_shape, output_fps, max_
     # go through each input video
     listing = glob.glob(input_path)
     print('Processing %d video(s)...' % len(listing))
-    
+
     for file in listing:
         if os.path.isfile(file):
             video = cv2.VideoCapture(file)
@@ -48,7 +48,7 @@ def extract_video_frames(input_path, output_path, resize_shape, output_fps, max_
             orig_framerate = video.get(cv2.CAP_PROP_FPS)
             total_frames = video.get(cv2.CAP_PROP_FRAME_COUNT)
             read_step = math.ceil(orig_framerate / output_fps)
-            
+
             print('Extracting video frames from %s ...   (%dx%d, %f fps, %d frames)' % (file,
                      int(video.get(cv2.CAP_PROP_FRAME_WIDTH)), int(video.get(cv2.CAP_PROP_FRAME_HEIGHT)),
                     orig_framerate, total_frames))
@@ -74,12 +74,14 @@ def extract_video_frames(input_path, output_path, resize_shape, output_fps, max_
                     print(image)
                     save_count += 1
                 frame_count += 1
+
             print('      ...saved %d frames' % save_count)
             video.release()
             print('done')
 
             if do_delete_processed_videos:
                 os.remove(file)
+
 
 ##	python3 generate_CNN_features.py --input=sld/frames --output=sld/frames_cnnfc1 --groundtruth=sld/groundtruth.txt  --fc1_layer=True
 
