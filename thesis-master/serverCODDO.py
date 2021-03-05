@@ -180,15 +180,9 @@ def test_one_file(video_id, groundtruth_file, timesteps, image_data_shape, video
     print(gt)
     print('ok\n')
 
-    # the video file to be processed
-    video_folder = os.path.join(path_to_videos, video_id)
-
     # select the groundtruth rows for this video
     print('Processing video {} ...'.format(video_id))
     gts = gt.loc[gt['video_id'] == video_id]
-
-    # get all the frames for this video
-    frame_list = os.listdir(video_folder)
 
 
     cnn_files = []
