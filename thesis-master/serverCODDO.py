@@ -71,7 +71,6 @@ def extract_video_frames(input_path, resize_shape, output_fps, max_frames_per_vi
                     if video.read()[1] is not None:
                         image = cv2.resize(video.read()[1], resize_shape, interpolation = cv2.INTER_AREA)
                         frames.append(image)
-                    print(image)
                     save_count += 1
                 frame_count += 1
 
@@ -85,7 +84,7 @@ def extract_video_frames(input_path, resize_shape, output_fps, max_frames_per_vi
 
 ##	python3 generate_CNN_features.py --input=sld/frames --output=sld/frames_cnnfc1 --groundtruth=sld/groundtruth.txt  --fc1_layer=True
 
-def generate_CNN_features(input_path, input_file_mask, cnn_model, output_path, groundtruth_file=""):
+def generate_CNN_features( input_file_mask, cnn_model, output_path, groundtruth_file=""):
     # groundtruth data?
     gt = {}
     have_groundtruth_data = False
