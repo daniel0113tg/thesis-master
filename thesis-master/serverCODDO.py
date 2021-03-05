@@ -69,7 +69,7 @@ def extract_video_frames(input_path, resize_shape, output_fps, max_frames_per_vi
                 if frame_count % read_step == 0:         # save every Nth frame
                     if video.read()[1] is not None:
                         image = cv2.resize(video.read()[1], resize_shape, interpolation = cv2.INTER_AREA)
-                        frames.append(str(int(frame_count)),image)
+                        frames.append([str(int(frame_count)),image])
                     save_count += 1
                 frame_count += 1
 
