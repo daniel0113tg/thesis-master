@@ -26,7 +26,7 @@ from create_neural_net_model import create_cnn_model
 frames = [] 
 framesXCNN = []
 
-def extract_video_frames(input_path, output_path, resize_shape, output_fps, max_frames_per_video=999999, do_delete_processed_videos=False):
+def extract_video_frames(input_path, resize_shape, output_fps, max_frames_per_video=999999, do_delete_processed_videos=False):
     """
         extracts video frames from a video at a rate of N frames every second (determined by output_fps).
         The video frames are rescaled to the specified frame size.
