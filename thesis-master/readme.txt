@@ -86,7 +86,7 @@ the first convolutional layer of VGG-16 to handle such an input with more than 3
 
 Usage is as follows:
 
-	python3 generate_CNN_features.py --input=sld/frames --output=sld/frames_cnnfc1 --groundtruth=sld/groundtruth.txt  --fc1_layer=True
+	python3 generate_CNN_features.py --input=sld/frames --output=sld/frames_cnnfc1 --groundtruth=sld/groundtruth.txt  
 	
 	python generate_CNN_features.py --input=\sld\diff  --output=\sld\diff_cnnfc1  --groundtruth=\sld\groundtruth.txt  --fc1_layer=True
 	
@@ -167,9 +167,12 @@ This uses the video segments created earlier. Each video segment has a consisten
 If you want to test a full video via a sliding window approach (regardless of whether the video segment has a consistent segment or not), then use the script:
 test_one_file.py. This does checking of the predicted class label at frame level. Usage is as follows:
 
+	python3 serverCODDO.py --videos --input=sld/videos --max-frames=2000  --fps=5 --fc1_layer=True
+
 	python test_one_file.py  --videos=/sld/frames_cnnfc1  --video_id=HUMEcnkvhJU  --gt=\sld\groundtruth.txt  --timesteps=20  --fc1_layer=True  --model=/sld/rnn.h5  --output=/sld
 	
-	
+	python3 test_one_file.py  --videos=/sld/frames_cnnfc1  --video_id=3DEzJTxxmlM  --timesteps=20  --gt=\sld\groundtruth.txt --fc1_layer=True  --model=/sld/rnn.h5  --output=/sld
+
 
 ------
 	
