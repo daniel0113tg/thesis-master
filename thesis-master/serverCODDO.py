@@ -193,6 +193,7 @@ def test_one_file(video_id, groundtruth_file, timesteps, image_data_shape, video
     # go through the sampled video frames for which we have CNN features...
     for frame_file in framesXCNN:
         frame_num = int(frame_file[0])
+        print(frame_num)
         
         # get groundtruth value
         gt_label = '?'
@@ -224,7 +225,7 @@ def test_one_file(video_id, groundtruth_file, timesteps, image_data_shape, video
         for (j, ndx) in enumerate(window_ndx):
             print(cnn_files[ndx])
             dt = cnn_files[ndx]
-            dt = np.array(dt['X']) 
+            dt = dt['X'] 
    # has shape (timesteps, CNN feature vector length)
             X.append(dt[0, ...])
         X = np.array(X)
