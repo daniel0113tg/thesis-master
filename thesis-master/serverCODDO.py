@@ -305,4 +305,4 @@ if __name__ == "__main__":
             int(args.imheight)), do_delete_processed_videos=args.del_videos)
 
     for f in frames:    
-        print(frames[0])
+        print(f[0])
