@@ -67,7 +67,7 @@ def extract_video_frames(input_path, output_path, resize_shape, output_fps, max_
                             image = cv2.resize(video.read()[1], resize_shape, interpolation = cv2.INTER_AREA)
                         filename = os.path.join(output_video_dir, str(int(frame_count)) + ".jpg")
                         print(filename)
-                        print(image)
+                        print(len(image))
                         cv2.imwrite(filename, image )
                         save_count += 1
                     frame_count += 1

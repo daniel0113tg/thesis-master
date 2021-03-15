@@ -59,8 +59,6 @@ def generate_CNN_features(input_path, input_file_mask, cnn_model, output_path, g
             # for each video frame...
             for image_j in video_i_images:
                 frame_id = int(os.path.splitext(os.path.basename(image_j))[0])
-                print (type(image_j))
-                print (0)
                 skip_frame = False
                 try:
                     skip_frame = True if have_groundtruth_data and gt[(video_i, frame_id)] == '?' else False
