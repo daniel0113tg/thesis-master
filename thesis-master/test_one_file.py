@@ -176,7 +176,7 @@ if __name__ == "__main__":
     argparser.add_argument("--output", help="Output path where the results and figures will be saved to", default="")
     args = argparser.parse_args()
 
-    if not args.videos or not args.video_id or not args.gt or not args.model:
+    if not args.videos or not args.video_id  or not args.model:
         argparser.print_help()
         exit()
 
