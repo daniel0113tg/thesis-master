@@ -33,7 +33,7 @@ Downloading of the videos is done via a call to:
 		python3  download_youtube_video_list.py  --urls="vetted_video_urls.txt" --output=\sld\videos
 		python3  download_a_single_youtube_video.py  --url="https://www.youtube.com/watch?v=3DEzJTxxmlM" --output=sld/videos
 
-python3  download_a_single_youtube_video.py  --url="https://www.youtube.com/watch?v=rjmKJKG5Nx0" --output=sld/videos
+python3  download_a_single_youtube_video.py  --url="https://www.youtube.com/watch?v=HUMEcnkvhJU" --output=sld/videos
 
 python3  download_a_single_youtube_video.py  --url="https://www.youtube.com/watch?v=sMtxcmyS330" --output=sld/videos
 
@@ -86,7 +86,7 @@ the first convolutional layer of VGG-16 to handle such an input with more than 3
 
 Usage is as follows:
 
-	python3 generate_CNN_features.py --input=sld/frames --output=sld/frames_cnnfc1 --groundtruth=sld/groundtruth.txt  
+	python3 generate_CNN_features.py --input=sld/frames --output=sld/frames_cnnfc1 --groundtruth=sld/groundtruth.txt  --fc1_layer=True
 	
 	python generate_CNN_features.py --input=\sld\diff  --output=\sld\diff_cnnfc1  --groundtruth=\sld\groundtruth.txt  --fc1_layer=True
 	
@@ -168,9 +168,9 @@ If you want to test a full video via a sliding window approach (regardless of wh
 test_one_file.py. This does checking of the predicted class label at frame level. Usage is as follows:
 
 
+	python3 serverCODDO.py --input=sld/videos --max-frames=2000  --fps=5 --fc1_layer=True --video_id=HUMEcnkvhJU --timesteps=20 --model=sld/rnn.h5 --output=sld/pipeline --gt=sld/groundtruth.txt
 
-
-	python test_one_file.py  --videos=/sld/frames_cnnfc1  --video_id=HUMEcnkvhJU  --gt=\sld\groundtruth.txt  --timesteps=20  --fc1_layer=True  --model=/sld/rnn.h5  --output=/sld
+	python3 test_one_file.py  --videos=sld/frames_cnnfc1  --video_id=rjmKJKG5Nx0  --gt=sld/groundtruth.txt  --timesteps=20  --fc1_layer=True  --model=sld/rnn.h5  --output=sld/pipeline
 	
 	python3 test_one_file.py  --videos=/sld/frames_cnnfc1  --video_id=3DEzJTxxmlM  --timesteps=20  --gt=\sld\groundtruth.txt --fc1_layer=True  --model=/sld/rnn.h5  --output=/sld
 
