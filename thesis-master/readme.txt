@@ -179,3 +179,14 @@ test_one_file.py. This does checking of the predicted class label at frame level
 	
 For any queries, please send an email to:    mborg2005@gmail.com
 
+Nuevo test
+
+python3 extract_video_frames.py --input=sld/videos --output=sld/frames  --max-frames=2000  --fps=5
+
+python3 generate_CNN_features.py --input=sld/frames --output=sld/frames_cnnfc1 --groundtruth=sld/groundtruth.txt  --fc1_layer=True
+
+python cut_into_video_segments.py  --input=\sld\frames_cnnfc1  --mask=*.npy  --len=20  --output=\sld\frames_cnnfc1_seg20  --gt=\sld\groundtruth.txt
+
+python prepare_validation_folds.py  --input=\sld\frames_cnnfc1_seg20  --output=\sld\frames_cnnfc1_seg20_folds  --folds=5
+
+python test_RNN_model.py  --test=/sld/frames_cnnfc1_seg20_folds/5  --model=/sld/rnn.h5  --results=/sld/results.txt   --timesteps=20  --fc1_layer=True  --batch=1024
