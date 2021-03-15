@@ -40,7 +40,9 @@ def extract_video_frames(input_path, resize_shape, output_fps, max_frames_per_vi
         The video frames are rescaled to the specified frame size.
     """
     file = input_path
+    print(file)
     if os.path.isfile(file):
+        print(true)
         video = cv2.VideoCapture(file)
 
         # compute the frame read step based on the video's fps and the output fps
