@@ -306,6 +306,5 @@ if __name__ == "__main__":
     generate_CNN_features(input_file_mask=args.mask, cnn_model=model, output_path=args.output, groundtruth_file=args.groundtruth)
 
 
-
-    for f in frameXCNN:    
+    for f in framesXCNN:    
         print(f[0])
