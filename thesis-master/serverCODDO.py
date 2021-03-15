@@ -304,4 +304,5 @@ if __name__ == "__main__":
             max_frames_per_video=int(args.max_frames), resize_shape=(int(args.imwidth), 
             int(args.imheight)), do_delete_processed_videos=args.del_videos)
 
-print(frames) 
+for f in frames
+print(frames[])
