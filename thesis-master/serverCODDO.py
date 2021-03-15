@@ -102,7 +102,6 @@ def generate_CNN_features( input_file_mask, cnn_model, output_path, groundtruth_
     tt = pytictoc.TicToc()
 
     tt.tic()
-    id = 0
     for image_j in frames:
             frame_id = image_j[0]
             skip_frame = False
@@ -129,13 +128,10 @@ def generate_CNN_features( input_file_mask, cnn_model, output_path, groundtruth_
                 X_cnn = cnn_model.predict_on_batch(X)
 
                 # save to array
-                framesXCNN.append([frame_id,X_cnn])
-            id = id + 1    
+                framesXCNN.append([frame_id,X_cnn])  
     tt.toc()
     print('\n\nReady')
     
-    print(framesXCNN)
-                
 
 def visualise_labels(gt_list, title_str=""):
     fig = plt.figure()
@@ -304,5 +300,12 @@ if __name__ == "__main__":
             max_frames_per_video=int(args.max_frames), resize_shape=(int(args.imwidth), 
             int(args.imheight)), do_delete_processed_videos=args.del_videos)
 
-    for f in frames:    
+    image_data_shape = (args.imwidth, args.imheight, 3)   # width, height, channels
+    model = create_cnn_model(image_data_shape, include_fc1_layer=args.fc1_layer)
+
+    generate_CNN_features(input_file_mask=args.mask, cnn_model=model, output_path=args.output, groundtruth_file=args.groundtruth)
+
+
+
+    for f in frameCNN:    
         print(f[0])
