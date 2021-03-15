@@ -307,5 +307,5 @@ if __name__ == "__main__":
 
 
 
-    for f in frameCNN:    
+    for f in frameXCNN:    
         print(f[0])
