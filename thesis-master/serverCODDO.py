@@ -255,7 +255,7 @@ def test_one_file(video_id, groundtruth_file, timesteps, image_data_shape, video
         results_file = open(os.path.join(output_path, video_id+'.txt'), 'w')
         results_file.write('video_id,frame_number,groundtruth_label,predicted_label,predicted_label_probability,probability_P,probability_S,probability_n,mismatch_flag\n')
         for k in range(len(frame_numbers)):
-            results_file.write('%s,%d,%s,%s,%f,%f,%f,%f,%s\n' % (video_id, frame_numbers[k][0], gt_labels[k], pred_labels[k], pred_prob[k], 
+            results_file.write('%s,%d,%s,%s,%f,%f,%f,%f,%s\n' % (video_id, int(frame_numbers[k][0]), gt_labels[k], pred_labels[k], pred_prob[k], 
                                 pred_probs[k,0], pred_probs[k,1], pred_probs[k,2], ' ' if gt_labels[k] == pred_labels[k] else '*WRONG*'))
         results_file.close()
 
@@ -265,7 +265,7 @@ def test_one_file(video_id, groundtruth_file, timesteps, image_data_shape, video
         results_file.write('video_id,frame_number,predicted_label,\n')
         for k in range(len(frame_numbers)):
             if(pred_labels[k] == "S"):
-                results_file.write('%s,%d,%s\n' % (video_id, frame_numbers[k][0], pred_labels[k]))
+                results_file.write('%s,%d,%s\n' % (video_id, int(frame_numbers[k][0]), pred_labels[k]))
         results_file.close()
 
     print('\nready')
