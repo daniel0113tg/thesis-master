@@ -132,6 +132,8 @@ def generate_CNN_features( input_file_mask, cnn_model, output_path, groundtruth_
     tt.toc()
     print('\n\nReady')
     
+    print(framesXCNN)
+                
 
 def visualise_labels(gt_list, title_str=""):
     fig = plt.figure()
@@ -163,7 +165,6 @@ def test_one_file(video_id, groundtruth_file, timesteps, image_data_shape, video
     print('aqui')
     print('Loading groundtruth data...')
     gt = pd.read_csv(groundtruth_file, delim_whitespace=True, header=None, names=['video_id', 'frame_id', 'gt'])
-    print(gt)
     print('ok\n')
 
     # select the groundtruth rows for this video
@@ -219,7 +220,6 @@ def test_one_file(video_id, groundtruth_file, timesteps, image_data_shape, video
         # process...
         answer = model.predict(X)
         
-        print(answer)
         # find the maximum of the predictions (& decode from one-hot-encoding for groundthruth labels)
         for batch_i in range(0, len(answer)):     # we have an answer for each batch (1 answer in this case)
             predicted_class = np.argmax(answer[batch_i])
@@ -255,7 +255,7 @@ def test_one_file(video_id, groundtruth_file, timesteps, image_data_shape, video
         results_file = open(os.path.join(output_path, video_id+'.txt'), 'w')
         results_file.write('video_id,frame_number,groundtruth_label,predicted_label,predicted_label_probability,probability_P,probability_S,probability_n,mismatch_flag\n')
         for k in range(len(frame_numbers)):
-            results_file.write('%s,%d,%s,%s,%f,%f,%f,%f,%s\n' % (video_id, frame_numbers[k], gt_labels[k], pred_labels[k], pred_prob[k], 
+            results_file.write('%s,%d,%s,%s,%f,%f,%f,%f,%s\n' % (video_id, frame_numbers[k][0], gt_labels[k], pred_labels[k], pred_prob[k], 
                                 pred_probs[k,0], pred_probs[k,1], pred_probs[k,2], ' ' if gt_labels[k] == pred_labels[k] else '*WRONG*'))
         results_file.close()
 
@@ -265,7 +265,7 @@ def test_one_file(video_id, groundtruth_file, timesteps, image_data_shape, video
         results_file.write('video_id,frame_number,predicted_label,\n')
         for k in range(len(frame_numbers)):
             if(pred_labels[k] == "S"):
-                results_file.write('%s,%d,%s\n' % (video_id, frame_numbers[k], pred_labels[k]))
+                results_file.write('%s,%d,%s\n' % (video_id, frame_numbers[k][0], pred_labels[k]))
         results_file.close()
 
     print('\nready')
@@ -305,6 +305,18 @@ if __name__ == "__main__":
 
     generate_CNN_features(input_file_mask=args.mask, cnn_model=model, output_path=args.output, groundtruth_file=args.groundtruth)
 
+    args.timesteps = int(args.timesteps)
 
-    for f in framesXCNN:    
-        print(f[0])
+    image_data_shape = (args.imwidth, args.imheight, 3)                         # image width, image height, channels
+    video_clip_data_shape = (args.timesteps, args.imwidth, args.imheight, 3)    # timesteps, image width, image height, channels
+    rnn_input_shape = (args.timesteps, 4096) if args.fc1_layer else (args.timesteps, 7, 7, 512)    # timesteps, CNN features width, CNN features height, CNN features channels
+
+    t = pytictoc.TicToc()
+    t.tic()
+
+    print("Start ")
+    test_one_file( video_id=args.video_id, groundtruth_file=args.gt, timesteps=int(args.timesteps),
+                image_data_shape=image_data_shape, video_data_shape=video_clip_data_shape, rnn_input_shape=rnn_input_shape, include_cnn_fc1_layer=args.fc1_layer,
+                model_weights_file=args.model, output_path=args.output)
+
+    t.toc()
