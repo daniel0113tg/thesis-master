@@ -299,7 +299,7 @@ if __name__ == "__main__":
         argparser.print_help()
         exit()
 
-    extract_video_frames(input_path=args.input, output_fps=int(args.fps), 
+    extract_video_frames(video_id=args.video_id, output_fps=int(args.fps), 
             max_frames_per_video=int(args.max_frames), resize_shape=(int(args.imwidth), 
             int(args.imheight)), do_delete_processed_videos=args.del_videos)
 
