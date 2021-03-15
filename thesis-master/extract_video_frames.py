@@ -57,9 +57,11 @@ def extract_video_frames(input_path, output_path, resize_shape, output_fps, max_
                         print(save_count, max_frames_per_video)
                         break
 
+                    success, image = video.read()
                     if video.read()[0] is False:
                         print("no leyo el video")
                         break
+                    print(success, image)
                     if frame_count % read_step == 0:         # save every Nth frame
                         if video.read()[1] is not None:
                             image = cv2.resize(video.read()[1], resize_shape, interpolation = cv2.INTER_AREA)
