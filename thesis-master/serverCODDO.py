@@ -304,23 +304,4 @@ if __name__ == "__main__":
             max_frames_per_video=int(args.max_frames), resize_shape=(int(args.imwidth), 
             int(args.imheight)), do_delete_processed_videos=args.del_videos)
 
-    image_data_shape = (args.imwidth, args.imheight, 3)   # width, height, channels
-    model = create_cnn_model(image_data_shape, include_fc1_layer=args.fc1_layer)
-
-    generate_CNN_features(input_file_mask=args.mask, cnn_model=model, output_path=args.output, groundtruth_file=args.groundtruth)
-
-    args.timesteps = int(args.timesteps)
-
-    image_data_shape = (args.imwidth, args.imheight, 3)                         # image width, image height, channels
-    video_clip_data_shape = (args.timesteps, args.imwidth, args.imheight, 3)    # timesteps, image width, image height, channels
-    rnn_input_shape = (args.timesteps, 4096) if args.fc1_layer else (args.timesteps, 7, 7, 512)    # timesteps, CNN features width, CNN features height, CNN features channels
-
-    t = pytictoc.TicToc()
-    t.tic()
-
-    print("Start ")
-    test_one_file( video_id=args.video_id, groundtruth_file=args.gt, timesteps=int(args.timesteps),
-                image_data_shape=image_data_shape, video_data_shape=video_clip_data_shape, rnn_input_shape=rnn_input_shape, include_cnn_fc1_layer=args.fc1_layer,
-                model_weights_file=args.model, output_path=args.output)
-
-    t.toc()
+print(frames) 
