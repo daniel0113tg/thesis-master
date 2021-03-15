@@ -50,20 +50,18 @@ def extract_video_frames(input_path, output_path, resize_shape, output_fps, max_
                 frame_count = 0
                 save_count = 0
                 while video.isOpened():
-                    print("abbierto")
-                    #frameId = video.get(1)
 
                     if save_count > max_frames_per_video:
                         print(save_count, max_frames_per_video)
                         break
 
                     success, image = video.read()
-                    if video.read()[0] is False:
+                    if success is False:
                         print("no leyo el video")
                         break
                     if frame_count % read_step == 0:         # save every Nth frame
-                        if video.read()[1] is not None:
-                            image = cv2.resize(video.read()[1], resize_shape, interpolation = cv2.INTER_AREA)
+                        if image is not None:
+                            image = cv2.resize(image, resize_shape, interpolation = cv2.INTER_AREA)
                         filename = os.path.join(output_video_dir, str(int(frame_count)) + ".jpg")
                         print(filename)
                         print(len(image))
