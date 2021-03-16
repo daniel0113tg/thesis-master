@@ -69,7 +69,6 @@ def generate_CNN_features(input_path, input_file_mask, cnn_model, output_path, g
                     print("x", end='', flush=True)
                 else:
                     # load the image and convert to numpy 3D array
-                    print (type(image_j))
                     img = np.array(preprocessing.image.load_img(image_j))
 
                     # Note that we don't scale the pixel values because VGG16 was not trained with normalised pixel values!

@@ -98,9 +98,7 @@ def test_one_file(path_to_videos, video_id, groundtruth_file, timesteps, image_d
         # get the CNN features Cuesiton
         X = []
         for (j, ndx) in enumerate(window_ndx):
-            print(cnn_files[ndx])
             dt = np.load(cnn_files[ndx])
-            print(len(dt['X']))
             dt = np.array(dt['X']) 
    # has shape (timesteps, CNN feature vector length)
             X.append(dt[0, ...])

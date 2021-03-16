@@ -49,11 +49,7 @@ Rather than using download_youtube_video_list.py, one could also make use of the
 
 EXTRACTING FRAMES AND MOTION DATA:
 
-Once the videos are downloaded, then raw video frames and motion data can be extracted via a call to the following scripts:
-- extract_video_frames.py : extracts video frames at a specified output frame rate (e.g. 5Hz) and resizing the video frames to a given size
-- extract_video_frame_differences.py : computes multi-frame differecing at a specific output frame rate
-- extract_flow_data.py : extracts stacked optical flow data of K consecutive frames at a specific output frame rate
-- extract_motion_history.py : extracts the motion history image (MHI) of K consecutive frames at a specific output frame rate
+
 
 Usage is as follows:
 
