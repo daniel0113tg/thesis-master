@@ -11,7 +11,6 @@ import cv2
 import argparse
 import os
 import glob
-import argparse
 import pytictoc
 import numpy as np
 from PIL import Image
@@ -25,12 +24,14 @@ from matplotlib.patches import Rectangle
 from itertools import chain
 from create_neural_net_model import create_neural_net_model
 
+
 ##Extract video frames from a camara web service
 ##Video frames are extracted at a rate of N frames every second and rescaled to the
 ##given size (224x224 by default).
 
 frames = [] 
 framesXCNN = []
+frames_signing = []
 # 0 maps to 'P' (speaking), 1 maps to 'S' (signing), 2 maps to 'n' (other) 
 CLASS_MAP = ['P', 'S', 'n']
 
@@ -47,8 +48,8 @@ def extract_video_frames(input_path, resize_shape, output_fps, max_frames_per_vi
         # compute the frame read step based on the video's fps and the output fps
         orig_framerate = video.get(cv2.CAP_PROP_FPS)
         total_frames = video.get(cv2.CAP_PROP_FRAME_COUNT)
-        read_step = math.ceil(orig_framerate / output_fps)
-
+        read_step = math.ceil(orig_framerate)
+        #read_step = math.ceil(orig_framerate / output_fps)
         print('Extracting video frames from %s ...   (%dx%d, %f fps, %d frames)' % (file,int(video.get(cv2.CAP_PROP_FRAME_WIDTH)), int(video.get(cv2.CAP_PROP_FRAME_HEIGHT)),orig_framerate, total_frames))
                     
         frame_count = 0
@@ -265,6 +266,7 @@ def test_one_file(video_id, groundtruth_file, timesteps, image_data_shape, video
         results_file.write('video_id,frame_number,predicted_label,\n')
         for k in range(len(frame_numbers)):
             if(pred_labels[k] == "S"):
+                frames_signing.append(frames[0][frames[0] == frame_numbers[k]])
                 results_file.write('%s,%d,%s\n' % (video_id, frame_numbers[k], pred_labels[k]))
         results_file.close()
 
@@ -320,3 +322,4 @@ if __name__ == "__main__":
                 model_weights_file=args.model, output_path=args.output)
 
     t.toc()
+    print(frames_signing)
