@@ -164,7 +164,7 @@ If you want to test a full video via a sliding window approach (regardless of wh
 test_one_file.py. This does checking of the predicted class label at frame level. Usage is as follows:
 
 
-	python3 serverCODDO.py --input=sld/videos/HUMEcnkvhJU.mp4 --max-frames=2000  --fps=5 --fc1_layer=True --video_id=HUMEcnkvhJU --timesteps=20 --model=sld/rnn.h5 --output=sld/pipeline --gt=sld/groundtruth.txt
+	python3 serverCODDO.py --input=sld/videos/HUMEcnkvhJU.mp4 --max-frames=2000  --fps=1 --fc1_layer=True --video_id=HUMEcnkvhJU --timesteps=20 --model=sld/rnn.h5 --output=sld/pipeline --gt=sld/groundtruth.txt
 
 	python3 test_one_file.py  --videos=sld/frames_cnnfc1  --video_id=HUMEcnkvhJU  --gt=sld/groundtruth.txt  --timesteps=20  --fc1_layer=True  --model=sld/rnn.h5  --output=sld
 	
