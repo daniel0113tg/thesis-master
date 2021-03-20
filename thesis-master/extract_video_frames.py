@@ -85,7 +85,7 @@ if __name__ == "__main__":
     argparser  =argparse.ArgumentParser()
     argparser.add_argument("--input", help="Path to the input folder containing the downloaded YouTube videos. Can contain a file mask.", default="")
     argparser.add_argument("--output", help="Path to the output folder where the image frames will be extracted to", default="")
-    argparser.add_argument("--fps", help="The rate at which frames will be extracted", default=5)
+    argparser.add_argument("--fps", help="The rate at which frames will be extracted", default=1)
     argparser.add_argument("--max-frames", help="Maximum number of frames extracted for each individual video", default=2000)
     argparser.add_argument("--imwidth", help="Extracted frames wil be resized to this width (in pixels)", default=224)
     argparser.add_argument("--imheight", help="Extracted frames wil be resized to this height (in pixels)", default=224)
