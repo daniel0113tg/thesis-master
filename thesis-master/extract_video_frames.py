@@ -47,10 +47,10 @@ def extract_video_frames(input_path, output_path, resize_shape, output_fps, max_
                     output_video_dir, int(video.get(cv2.CAP_PROP_FRAME_WIDTH)), int(video.get(cv2.CAP_PROP_FRAME_HEIGHT)),
                     orig_framerate, total_frames))
 
-                frame_count = 0
-                save_count = 0
+                frame_count = 1
+                save_count = 1
                 while video.isOpened():
-                    print("abbierto")
+                    print(frame_count)
                     #frameId = video.get(1)
 
                     if save_count > max_frames_per_video:
@@ -60,18 +60,14 @@ def extract_video_frames(input_path, output_path, resize_shape, output_fps, max_
                     success, image = video.read()
                     if video.read()[0] is False:
                         print("no leyo el video")
-                        break
-                    print(success, image)
                     #if frame_count % read_step == 0:         # save every Nth frame
                     if video.read()[1] is not None:
                         image = cv2.resize(video.read()[1], resize_shape, interpolation = cv2.INTER_AREA)
                     filename = os.path.join(output_video_dir, str(int(frame_count)) + ".jpg")
-                    print(filename)
-                    print(len(image))
                     cv2.imwrite(filename, image )
                     save_count += 1
                     frame_count += 1
-                    
+
                 print('      ...saved %d frames' % save_count)
                 video.release()
                 print('done')
@@ -87,7 +83,7 @@ if __name__ == "__main__":
     argparser.add_argument("--input", help="Path to the input folder containing the downloaded YouTube videos. Can contain a file mask.", default="")
     argparser.add_argument("--output", help="Path to the output folder where the image frames will be extracted to", default="")
     argparser.add_argument("--fps", help="The rate at which frames will be extracted", default=1)
-    argparser.add_argument("--max-frames", help="Maximum number of frames extracted for each individual video", default=2000)
+    argparser.add_argument("--max-frames", help="Maximum number of frames extracted for each individual video", default=999999)
     argparser.add_argument("--imwidth", help="Extracted frames wil be resized to this width (in pixels)", default=224)
     argparser.add_argument("--imheight", help="Extracted frames wil be resized to this height (in pixels)", default=224)
     argparser.add_argument("--del-videos", help="Delete each video once frames have been extracted from it", default=False)
