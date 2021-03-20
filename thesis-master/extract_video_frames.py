@@ -35,6 +35,7 @@ def extract_video_frames(input_path, output_path, resize_shape, output_fps, max_
             # compute the frame read step based on the video's fps and the output fps
             orig_framerate = video.get(cv2.CAP_PROP_FPS)
             total_frames = video.get(cv2.CAP_PROP_FRAME_COUNT)
+            print(orig_framerate, total_frames)
             read_step = math.ceil(orig_framerate / output_fps)
 
             output_video_dir = os.path.join(output_path, os.path.splitext(os.path.basename(file))[0])
@@ -50,9 +51,6 @@ def extract_video_frames(input_path, output_path, resize_shape, output_fps, max_
                 frame_count = 1
                 save_count = 1
                 while video.isOpened():
-                    print(frame_count)
-                    #frameId = video.get(1)
-
                     if save_count > max_frames_per_video:
                         print(save_count, max_frames_per_video)
                         break
@@ -60,6 +58,7 @@ def extract_video_frames(input_path, output_path, resize_shape, output_fps, max_
                     success, image = video.read()
                     if video.read()[0] is False:
                         print("no leyo el video")
+                        break
                     #if frame_count % read_step == 0:         # save every Nth frame
                     if video.read()[1] is not None:
                         image = cv2.resize(video.read()[1], resize_shape, interpolation = cv2.INTER_AREA)
