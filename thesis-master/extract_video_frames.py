@@ -36,7 +36,6 @@ def extract_video_frames(input_path, output_path, resize_shape, output_fps, max_
             orig_framerate = video.get(cv2.CAP_PROP_FPS)
             total_frames = video.get(cv2.CAP_PROP_FRAME_COUNT)
             print(orig_framerate, total_frames)
-            read_step = math.ceil(orig_framerate / output_fps)
 
             output_video_dir = os.path.join(output_path, os.path.splitext(os.path.basename(file))[0])
 
@@ -62,12 +61,12 @@ def extract_video_frames(input_path, output_path, resize_shape, output_fps, max_
                     #if frame_count % read_step == 0:         # save every Nth frame
                     if video.read()[1] is not None:
                         image = cv2.resize(video.read()[1], resize_shape, interpolation = cv2.INTER_AREA)
-                    filename = os.path.join(output_video_dir, str(int(frame_count)) + ".jpg")
-                    cv2.imwrite(filename, image )
-                    save_count += 1
-                    frame_count += 1
+                        filename = os.path.join(output_video_dir, str(int(frame_count)) + ".jpg")
+                        cv2.imwrite(filename, image)
+                        save_count += 1
+                        frame_count += 1
 
-                print('      ...saved %d frames' % save_count)
+                print('      ...saved %d frames' % frame_count)
                 video.release()
                 print('done')
 
