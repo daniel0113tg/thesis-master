@@ -15,7 +15,7 @@ from utils import CvFpsCalc
 import matplotlib.pyplot as plt
 
 # initialize the ImageHub object
-imageHub = imagezmq.ImageHub()
+imageHub = imagezmq.ImageHub(open_port='tcp://127.0.0.1:5558')
 frameDict = {}
 
 # initialize the dictionary which will contain  information regarding

@@ -3,7 +3,6 @@ import os
 import glob
 import math
 import argparse
-import pytictoc
 import common
 import imagezmq
 import copy
@@ -12,7 +11,6 @@ import pandas as pd
 import cv2 as cv
 import mediapipe as mp
 import matplotlib.pyplot as plt
-from PIL import Imaget
 from itertools import chain
 from keras import preprocessing
 from keras.applications.vgg16 import preprocess_inpu
@@ -24,7 +22,7 @@ from utils import CvFpsCalc
 
 
 # initialize the ImageHub object
-imageHub = imagezmq.ImageHub()
+imageHub = imagezmq.ImageHub(open_port='tcp://127.0.0.1:5558')
 frameDict = {}
 
 # initialize the dictionary which will contain  information regarding
@@ -54,8 +52,7 @@ def generate_CNN_features(frame,time ,cnn_model):
     tt = pytictoc.TicToc()
     tt.tic()
     # load the image and convert to numpy 3D array
-    img_pil = preprocessing.image.array_to_img(frame)
-    img = np.array(preprocessing.image.array_to_img(img_pil))
+    img = np.array(frame)
 
     # Note that we don't scale the pixel values because VGG16 was not trained with normalised pixel values!
     # Instead we use the pre-processing function that comes specifically with the VGG16
