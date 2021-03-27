@@ -22,7 +22,7 @@ from utils import CvFpsCalc
 
 
 # initialize the ImageHub object
-imageHub = imagezmq.ImageHub(open_port='tcp://127.0.0.1:5558')
+imageHub = imagezmq.ImageHub(open_port='tcp://201.159.223.253:5558')
 frameDict = {}
 
 # initialize the dictionary which will contain  information regarding
