@@ -18,13 +18,13 @@ args = vars(ap.parse_args())
 
 # initialize the ImageSender object with the socket address of the
 # server
-sender = imagezmq.ImageSender(connect_to="https://{}:5558".format(
+sender = imagezmq.ImageSender(connect_to="tcp://{}:5558".format(
 	args["server_ip"]))
 
 # get the host name, initialize the video stream, and allow the
 # camera sensor to warmup
 print("paso")
-rpiName = '186.101.145.32'
+rpiName =socket.gethostname()
 print(rpiName)
 vs = cv.VideoCapture(0)
 #vs = VideoStream(src=0).start()
