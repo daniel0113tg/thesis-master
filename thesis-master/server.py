@@ -162,8 +162,8 @@ def main():
         time = time + 1
         print(time)
         # キー処理(ESC：終了) #################################################
-        input = eval(input())
-        if input == 'q':
+        inpt = eval(input())
+        if inpt == 'q':
             break
 
 
