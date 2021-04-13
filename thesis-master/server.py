@@ -164,9 +164,6 @@ def main():
         time = time + 1
         print(time)
         # キー処理(ESC：終了) #################################################
-        inpt = eval(input())
-        if inpt == 'q':
-            break
 
 
 		# update the new frame in the frame dictionary
