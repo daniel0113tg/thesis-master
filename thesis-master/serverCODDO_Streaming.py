@@ -149,12 +149,9 @@ def detect_sign(frame, timesteps, image_data_shape, video_data_shape, rnn_input_
     print("\n")
     exists_sign = False
     if output_path:
-        results_file = open(os.path.join(output_path, video_id+'_signing.txt'), 'w')
-        results_file.write('video_id,frame_number,predicted_label,\n')
         for k in range(len(frame_numbers)):
             if(pred_labels[k] == "S"):
                 exists_sign = True
-                results_file.write('%s,%d,%s\n' % (frame[0], frame[1], pred_labels[k]))
         results_file.close()
 
     print('\nready')
