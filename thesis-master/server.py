@@ -160,10 +160,10 @@ def main():
         time = time + 1
         print(time)
         # キー処理(ESC：終了) #################################################
-        '''key = cv.waitKey(1)
+        key = cv.waitKey(1)
         if key == 27:  # ESC
             break
-        '''
+        
 		# update the new frame in the frame dictionary
         frameDict[rpiName] = frame
 
@@ -210,9 +210,10 @@ def main():
                 x.append(point[i][0])
                 y.append(point[i][1])
             ax1.plot(x, y)
-    ##plt.savefig('trajectory_space_of_hand.jpg')
+    plt.savefig('trajectory_space_of_hand.jpg')
     np.savetxt('R_hand_landmarks_transpose.txt', R_hand_landmarks_transpose, delimiter=",", newline = "\n", fmt="%s")
     np.savetxt('L_hand_landmarks_transpose.txt', L_hand_landmarks_transpose, delimiter=",", newline = "\n", fmt="%s")
+    print('Imagenes_Salvadas')
     ##cv.destroyAllWindows()
 
 
