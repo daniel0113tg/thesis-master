@@ -109,61 +109,16 @@ def main():
         results = holistic.process(image)
         image.flags.writeable = True
 
-        # Face Mesh ###########################################################
-        face_landmarks = results.face_landmarks
-        if face_landmarks is not None:
-            # 外接矩形の計算
-            brect = calc_bounding_rect(debug_image, face_landmarks)
-            # 描画
-            debug_image = draw_face_landmarks(debug_image, face_landmarks)
-            debug_image = draw_bounding_rect(use_brect, debug_image, brect)
-
-        # Pose ###############################################################
-        pose_landmarks = results.pose_landmarks
-        if pose_landmarks is not None:
-            # 外接矩形の計算
-            brect = calc_bounding_rect(debug_image, pose_landmarks)
-            # 描画
-            debug_image = draw_pose_landmarks(debug_image, pose_landmarks,
-                                              upper_body_only)
-            debug_image = draw_bounding_rect(use_brect, debug_image, brect)
-
-        # Hands ###############################################################
-        left_hand_landmarks = results.left_hand_landmarks
-        right_hand_landmarks = results.right_hand_landmarks
-
-        # 左手
-        if left_hand_landmarks is not None:
-            # 手の平重心計算 (Calcular centor de gravedad de la palma izquierda)
-            cx, cy = calc_palm_moment(debug_image, left_hand_landmarks)
-            # Calcular el rectangulo delimitador
-            brect = calc_bounding_rect(debug_image, left_hand_landmarks)
-            #Dibujar
-            debug_image = draw_hands_landmarks(time,debug_image, cx, cy,
-                                               left_hand_landmarks,
-                                               upper_body_only, 'R')
-            debug_image = draw_bounding_rect(use_brect, debug_image, brect)
-        # 右手
-        if right_hand_landmarks is not None:
-            # 手の平重心計算
-            cx, cy = calc_palm_moment(debug_image, right_hand_landmarks)
-            # 外接矩形の計算
-            brect = calc_bounding_rect(debug_image, right_hand_landmarks)
-            # 描画
-            debug_image = draw_hands_landmarks(time,debug_image, cx, cy,
-                                               right_hand_landmarks,
-                                               upper_body_only, 'L')
-            debug_image = draw_bounding_rect(use_brect, debug_image, brect)
-
-        cv.putText(debug_image, "FPS:" + str(display_fps), (10, 30),
-                   cv.FONT_HERSHEY_SIMPLEX, 1.0, (0, 255, 0), 2, cv.LINE_AA)
+    
+        ##cv.putText(debug_image, "FPS:" + str(display_fps), (10, 30),
+                   ##cv.FONT_HERSHEY_SIMPLEX, 1.0, (0, 255, 0), 2, cv.LINE_AA)
         time = time + 1
         print(time)
         # キー処理(ESC：終了) #################################################
-        key = cv.waitKey(1)
+        '''key = cv.waitKey(1)
         if key == 27:  # ESC
             break
-
+        '''
 		# update the new frame in the frame dictionary
         frameDict[rpiName] = frame
 
@@ -183,7 +138,7 @@ def main():
         lastActiveCheck = datetime.now()
 
 		##############################################################
-        cv.imshow('MediaPipe Holistic Demo', debug_image)
+        ##cv.imshow('MediaPipe Holistic Demo', debug_image)
 			## TERMINA
     ##Creating an array for plot
     R_hand_landmarks_transpose = np.transpose(R_hand_landmarks)
@@ -210,10 +165,10 @@ def main():
                 x.append(point[i][0])
                 y.append(point[i][1])
             ax1.plot(x, y)
-    plt.savefig('trajectory_space_of_hand.jpg')
+    ##plt.savefig('trajectory_space_of_hand.jpg')
     np.savetxt('R_hand_landmarks_transpose.txt', R_hand_landmarks_transpose, delimiter=",", newline = "\n", fmt="%s")
     np.savetxt('L_hand_landmarks_transpose.txt', L_hand_landmarks_transpose, delimiter=",", newline = "\n", fmt="%s")
-    cv.destroyAllWindows()
+    ##cv.destroyAllWindows()
 
 
 def calc_palm_moment(image, landmarks):
