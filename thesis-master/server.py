@@ -109,7 +109,52 @@ def main():
         results = holistic.process(image)
         image.flags.writeable = True
 
-    
+        # Face Mesh ###########################################################
+        face_landmarks = results.face_landmarks
+        if face_landmarks is not None:
+            # 外接矩形の計算
+            brect = calc_bounding_rect(debug_image, face_landmarks)
+            # 描画
+            debug_image = draw_face_landmarks(debug_image, face_landmarks)
+            debug_image = draw_bounding_rect(use_brect, debug_image, brect)
+
+        # Pose ###############################################################
+        pose_landmarks = results.pose_landmarks
+        if pose_landmarks is not None:
+            # 外接矩形の計算
+            brect = calc_bounding_rect(debug_image, pose_landmarks)
+            # 描画
+            debug_image = draw_pose_landmarks(debug_image, pose_landmarks,
+                                              upper_body_only)
+            debug_image = draw_bounding_rect(use_brect, debug_image, brect)
+
+        # Hands ###############################################################
+        left_hand_landmarks = results.left_hand_landmarks
+        right_hand_landmarks = results.right_hand_landmarks
+
+        # 左手
+        if left_hand_landmarks is not None:
+            # 手の平重心計算 (Calcular centor de gravedad de la palma izquierda)
+            cx, cy = calc_palm_moment(debug_image, left_hand_landmarks)
+            # Calcular el rectangulo delimitador
+            brect = calc_bounding_rect(debug_image, left_hand_landmarks)
+            #Dibujar
+            debug_image = draw_hands_landmarks(time,debug_image, cx, cy,
+                                               left_hand_landmarks,
+                                               upper_body_only, 'R')
+            debug_image = draw_bounding_rect(use_brect, debug_image, brect)
+        # 右手
+        if right_hand_landmarks is not None:
+            # 手の平重心計算
+            cx, cy = calc_palm_moment(debug_image, right_hand_landmarks)
+            # 外接矩形の計算
+            brect = calc_bounding_rect(debug_image, right_hand_landmarks)
+            # 描画
+            debug_image = draw_hands_landmarks(time,debug_image, cx, cy,
+                                               right_hand_landmarks,
+                                               upper_body_only, 'L')
+            debug_image = draw_bounding_rect(use_brect, debug_image, brect)
+
         ##cv.putText(debug_image, "FPS:" + str(display_fps), (10, 30),
                    ##cv.FONT_HERSHEY_SIMPLEX, 1.0, (0, 255, 0), 2, cv.LINE_AA)
         time = time + 1
