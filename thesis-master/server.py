@@ -14,6 +14,8 @@ import mediapipe as mp
 from utils import CvFpsCalc
 import matplotlib.pyplot as plt
 import getch
+import keyboard as kb
+key = kb.read_hotkey()
 
 # initialize the ImageHub object
 imageHub = imagezmq.ImageHub(open_port='tcp://201.159.223.253:5558')
