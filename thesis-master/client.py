@@ -23,7 +23,9 @@ sender = imagezmq.ImageSender(connect_to="tcp://{}:5558".format(
 
 # get the host name, initialize the video stream, and allow the
 # camera sensor to warmup
-rpiName = socket.gethostname()
+print("paso")
+rpiName =socket.gethostname()
+print(rpiName)
 vs = cv.VideoCapture(0)
 #vs = VideoStream(src=0).start()
 time.sleep(2.0)
