@@ -782,7 +782,7 @@ def main():
 
         # 検出実施 #########################s####################################
         print("Iniciando servidor serverCODDO....")
-        image = cv.resize(frame,(240, 240), interpolation = cv.INTER_AREA)
+        image = cv.resize(frame,(224, 224), interpolation = cv.INTER_AREA)
         XCNN = generate_CNN_features(image, time, model)
         sign = detect_sign( XCNN , timesteps, image_data_shape, video_clip_data_shape, rnn_input_shape, fc1_layer,model_weights_file=args.model, output_path=args.output)
         print(sign)
