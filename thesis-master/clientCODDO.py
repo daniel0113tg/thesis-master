@@ -1,42 +1,41 @@
-# For more info: http://docs.opencv.org/3.0-beta/doc/py_tutorials/py_gui/py_video_display/py_video_display.html
-import cv2
+# import the necessary packages
+from imutils.video import VideoStream
+import imagezmq
+import argparse
+import socket
+import time
+import cv2 as cv
+import copy
 import numpy as np
+ 
+# construct the argument parser and parse the arguments
+ap = argparse.ArgumentParser()
+ap.add_argument("-s", "--server-ip", required=True,
+	help="ip address of the server to which the client will connect")
+args = vars(ap.parse_args())
 
-# Playing video from file:
-# cap = cv2.VideoCapture('vtest.avi')
-# Capturing video from webcam:
-cap = cv2.VideoCapture('http://192.168.100.43/video')
-if cap.isOpened():
-    currentFrame = 0
-    while(True):
-        # Capture frame-by-frame
-        ret, frame = cap.read()
+# initialize the ImageSender object with the socket address of the
+# server
+sender = imagezmq.ImageSender(connect_to="tcp://{}:5558".format(
+	args["server_ip"]))
 
-        # Handles the mirroring of the current frame
-        frame = cv2.flip(frame,1)
+# get the host name, initialize the video stream, and allow the
+# camera sensor to warmup
+print("paso")
+rpiName =socket.gethostname()
+print(rpiName)
+vs = cv.VideoCapture(0)
+#vs = VideoStream(src=0).start()
 
-        # Our operations on the frame come here
-        gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
-
-        # Saves image of the current frame in jpg file
-        # name = 'frame' + str(currentFrame) + '.jpg'
-        # cv2.imwrite(name, frame)
-
-        # Display the resulting frame
-        cv2.imshow('frame',gray)
-        if cv2.waitKey(1) & 0xFF == ord('q'):
-         break
-    # To stop duplicate images
-    currentFrame += 1
-    # When everything done, release the capture
-    cap.release()
-    cv2.destroyAllWindows()
-
-# Potential Error:
-# OpenCV: Cannot Use FaceTime HD Kamera
-# OpenCV: camera failed to properly initialize!
-# Segmentation fault: 11
-#
-# Solution:
-# I solved this by restarting my computer.
-# http://stackoverflow.com/questions/40719136/opencv-cannot-use-facetime/42678644#42678644
+while True:
+	ret, frame = vs.read()
+	if frame is not None:
+		frame = cv.resize(frame,(360, 360), interpolation = cv.INTER_AREA)
+		frame = cv.flip(frame,1)
+		##sender.send_image(rpiName, frame)
+		key = cv.waitKey(1)
+		if key == ord('q'):  # ESC
+			break
+		cv.imshow('ServerCODDO Demo',frame)
+##sender.send_image(rpiName, np.array([]))
+cv.destroyAllWindows()
