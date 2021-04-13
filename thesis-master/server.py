@@ -103,7 +103,7 @@ def main():
         lastActive[rpiName] = datetime.now()
 
         # 検出実施 #########################s####################################
-        if frame == None:
+        if frame is None:
             break
         image = frame
         debug_image = copy.deepcopy(image)
