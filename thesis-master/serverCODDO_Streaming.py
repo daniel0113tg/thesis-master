@@ -13,7 +13,7 @@ import mediapipe as mp
 import matplotlib.pyplot as plt
 from itertools import chain
 from keras import preprocessing
-from keras.applications.vgg16 import preprocess_inpu
+from keras.applications.vgg16 import preprocess_input
 from create_neural_net_model import create_cnn_model
 from create_neural_net_model import create_neural_net_model
 from imutils import build_montages
