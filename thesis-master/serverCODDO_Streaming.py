@@ -730,8 +730,8 @@ def get_args():
 def main():
     
     args = get_args()
-    imwidth = 360
-    imheight = 360
+    imwidth = 224
+    imheight = 224
     timesteps = 20
     fc1_layer = True
     image_data_shape = (imwidth, imheight, 3)   # width, height, channels
@@ -776,17 +776,17 @@ def main():
         print(len(frame))
         # 検出実施 #########################s####################################
         if len(np.asarray(frame)) == 0:
-            print("Ejecución de serverCODDO terminado")
+            print("Ejecución de serverCODDO terminado....")
             break
 
         # 検出実施 #########################s####################################
-        print("Start ")
-        image = frame
+        print("Iniciando servidor serverCODDO....")
+        image = cv.resize(frame,(240, 240), interpolation = cv.INTER_AREA)
         XCNN = generate_CNN_features(image, time, model)
         sign = detect_sign( XCNN , timesteps, image_data_shape, video_clip_data_shape, rnn_input_shape, fc1_layer,model_weights_file=args.model, output_path=args.output)
         print(sign)
         if sign:
-            debug_image = copy.deepcopy(image)
+            debug_image = copy.deepcopy(frame)
             image = cv.cvtColor(image, cv.COLOR_BGR2RGB)
             image.flags.writeable = False  
             results = holistic.process(image)
