@@ -155,8 +155,8 @@ def main():
                                                upper_body_only, 'L')
             debug_image = draw_bounding_rect(use_brect, debug_image, brect)
 
-        cv.putText(debug_image, "FPS:" + str(display_fps), (10, 30),
-                   cv.FONT_HERSHEY_SIMPLEX, 1.0, (0, 255, 0), 2, cv.LINE_AA)
+        ##cv.putText(debug_image, "FPS:" + str(display_fps), (10, 30),
+                   ##cv.FONT_HERSHEY_SIMPLEX, 1.0, (0, 255, 0), 2, cv.LINE_AA)
         time = time + 1
         print(time)
         # キー処理(ESC：終了) #################################################
@@ -210,10 +210,10 @@ def main():
                 x.append(point[i][0])
                 y.append(point[i][1])
             ax1.plot(x, y)
-    plt.savefig('trajectory_space_of_hand.jpg')
+    ##plt.savefig('trajectory_space_of_hand.jpg')
     np.savetxt('R_hand_landmarks_transpose.txt', R_hand_landmarks_transpose, delimiter=",", newline = "\n", fmt="%s")
     np.savetxt('L_hand_landmarks_transpose.txt', L_hand_landmarks_transpose, delimiter=",", newline = "\n", fmt="%s")
-    cv.destroyAllWindows()
+    ##cv.destroyAllWindows()
 
 
 def calc_palm_moment(image, landmarks):
