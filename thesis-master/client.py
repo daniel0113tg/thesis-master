@@ -37,6 +37,6 @@ while True:
 		frame = cv.flip(frame,1)
 		sender.send_image(rpiName, frame)
 		key = cv.waitKey(1)
-        if key == 27:  # ESC
+		if key == 27:
 			sender.send_image(rpiName, None)
-            break
+			break
