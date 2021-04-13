@@ -101,9 +101,9 @@ def main():
 		# record the last active time for the device from which we just
 		# received a frame
         lastActive[rpiName] = datetime.now()
-        print(frame)
+        print(len(frame))
         # 検出実施 #########################s####################################
-        if len(frame) == 0:
+        if len(np.asarray(frame)) == 0:
             break
         
         image = frame
