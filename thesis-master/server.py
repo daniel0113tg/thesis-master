@@ -162,7 +162,7 @@ def main():
         time = time + 1
         print(time)
         # キー処理(ESC：終了) #################################################
-        input = raw_input('prompt')
+        input = eval(input())
         if input == 'q':
             break
 
