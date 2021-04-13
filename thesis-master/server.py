@@ -13,7 +13,7 @@ import cv2 as cv
 import mediapipe as mp
 from utils import CvFpsCalc
 import matplotlib.pyplot as plt
-import getch
+from pynput.keyboard import Key, Listener
 
 # initialize the ImageHub object
 imageHub = imagezmq.ImageHub(open_port='tcp://201.159.223.253:5558')
@@ -164,6 +164,7 @@ def main():
         char = getch.getch()
         if char == 'q':
             break
+        
 
 		# update the new frame in the frame dictionary
         frameDict[rpiName] = frame
