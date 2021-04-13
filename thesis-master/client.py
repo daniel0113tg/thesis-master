@@ -32,10 +32,11 @@ time.sleep(2.0)
 
 while True:
 	ret, frame = vs.read()
-	if not ret:
-		print("break")
-		break
 	if frame is not None:
 		##frame = cv.resize(frame,(224,224), interpolation = cv.INTER_AREA)
 		frame = cv.flip(frame,1)
 		sender.send_image(rpiName, frame)
+		key = cv.waitKey(1)
+        if key == 27:  # ESC
+			sender.send_image(rpiName, None)
+            break

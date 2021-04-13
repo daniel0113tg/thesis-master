@@ -103,6 +103,8 @@ def main():
         lastActive[rpiName] = datetime.now()
 
         # 検出実施 #########################s####################################
+        if image == None:
+            break
         image = frame
         debug_image = copy.deepcopy(image)
         image = cv.cvtColor(image, cv.COLOR_BGR2RGB)
