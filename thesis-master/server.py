@@ -104,6 +104,7 @@ def main():
         print(len(frame))
         # 検出実施 #########################s####################################
         if len(np.asarray(frame)) == 0:
+            print("Ejecución de serverCODDO terminado")
             break
         
         image = frame

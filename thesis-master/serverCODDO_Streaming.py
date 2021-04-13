@@ -22,7 +22,7 @@ from utils import CvFpsCalc
 
 
 # initialize the ImageHub object
-imageHub = imagezmq.ImageHub(open_port='tcp://localhost:5558')
+imageHub = imagezmq.ImageHub(open_port='tcp://201.159.223.253:5558')
 frameDict = {}
 
 # initialize the dictionary which will contain  information regarding
@@ -333,6 +333,8 @@ def draw_hands_landmarks(time,
         cv.circle(image, (cx, cy), 12, (0, 255, 0), 2)
         cv.putText(image, handedness_str, (cx - 6, cy + 6),
                    cv.FONT_HERSHEY_SIMPLEX, 0.6, (0, 255, 0), 2, cv.LINE_AA)
+
+                   
     
     return image
 
@@ -728,8 +730,8 @@ def get_args():
 def main():
     
     args = get_args()
-    imwidth = 224
-    imheight = 224
+    imwidth = 360
+    imheight = 360
     timesteps = 20
     fc1_layer = True
     image_data_shape = (imwidth, imheight, 3)   # width, height, channels
@@ -771,6 +773,11 @@ def main():
 		# record the last active time for the device from which we just
 		# received a frame
         lastActive[rpiName] = datetime.now()
+         print(len(frame))
+        # 検出実施 #########################s####################################
+        if len(np.asarray(frame)) == 0:
+            print("Ejecución de serverCODDO terminado")
+            break
 
         # 検出実施 #########################s####################################
         print("Start ")
@@ -886,8 +893,6 @@ def main():
         print('No se encontraron signos')
     cv.destroyAllWindows()
         
-
-
 
 if __name__ == '__main__':
     main()
