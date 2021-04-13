@@ -152,7 +152,6 @@ def detect_sign(frame, timesteps, image_data_shape, video_data_shape, rnn_input_
         for k in range(len(frame_numbers)):
             if(pred_labels[k] == "S"):
                 exists_sign = True
-        results_file.close()
 
     print('\nready')
     return exists_sign
