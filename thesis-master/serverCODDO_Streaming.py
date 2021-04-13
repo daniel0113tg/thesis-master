@@ -773,7 +773,7 @@ def main():
 		# record the last active time for the device from which we just
 		# received a frame
         lastActive[rpiName] = datetime.now()
-         print(len(frame))
+        print(len(frame))
         # 検出実施 #########################s####################################
         if len(np.asarray(frame)) == 0:
             print("Ejecución de serverCODDO terminado")
