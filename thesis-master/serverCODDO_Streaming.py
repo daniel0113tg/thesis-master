@@ -4,6 +4,7 @@ import glob
 import math
 import argparse
 import common
+import pytictoc
 import imagezmq
 import copy
 import numpy as np
