@@ -183,7 +183,7 @@ def main():
         lastActiveCheck = datetime.now()
 
 		##############################################################
-        cv.imshow('MediaPipe Holistic Demo', debug_image)
+        ##cv.imshow('MediaPipe Holistic Demo', debug_image)
 			## TERMINA
     ##Creating an array for plot
     R_hand_landmarks_transpose = np.transpose(R_hand_landmarks)
