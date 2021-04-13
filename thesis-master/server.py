@@ -13,7 +13,7 @@ import cv2 as cv
 import mediapipe as mp
 from utils import CvFpsCalc
 import matplotlib.pyplot as plt
-from pynput import keyboard
+import keyboard
 
 # initialize the ImageHub object
 imageHub = imagezmq.ImageHub(open_port='tcp://201.159.223.253:5558')
@@ -161,10 +161,10 @@ def main():
         time = time + 1
         print(time)
         # キー処理(ESC：終了) #################################################
-        key = cv.waitKey(1)
-        if key == 27:  # ESC
+        a = keyboard.read_key()
+        if a == '1':
             break
-        
+
 		# update the new frame in the frame dictionary
         frameDict[rpiName] = frame
 
@@ -214,7 +214,7 @@ def main():
     plt.savefig('trajectory_space_of_hand.jpg')
     np.savetxt('R_hand_landmarks_transpose.txt', R_hand_landmarks_transpose, delimiter=",", newline = "\n", fmt="%s")
     np.savetxt('L_hand_landmarks_transpose.txt', L_hand_landmarks_transpose, delimiter=",", newline = "\n", fmt="%s")
-    print('Imagenes_Salvadas')
+    print()
     ##cv.destroyAllWindows()
 
 
