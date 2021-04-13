@@ -33,14 +33,12 @@ vs = cv.VideoCapture(0)
 while True:
 	ret, frame = vs.read()
 	if frame is not None:
-		frame = cv.resize(frame,(480, 480), interpolation = cv.INTER_AREA)
+		frame = cv.resize(frame,(360, 360), interpolation = cv.INTER_AREA)
 		frame = cv.flip(frame,1)
-		print(type(frame))
 		sender.send_image(rpiName, frame)
 		key = cv.waitKey(1)
 		if key == 27:  # ESC
-			print(len(np.array([])))
-			sender.send_image(rpiName, np.array([]))
 			break
 		cv.imshow('ServerCODDO Demo',frame)
+sender.send_image(rpiName, np.array([]))
 cv.destroyAllWindows()

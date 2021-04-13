@@ -62,6 +62,8 @@ L_hand_landmarks = []
 R_hand_landmarks = []
 
 def main():
+    lastActive = {}
+    lastActiveCheck = datetime.now()
 
     # 引数解析 #################################################################
     args = get_args()
@@ -94,10 +96,12 @@ def main():
         print("OK")
 		# if a device is not in the last active dictionary then it means
 		# that its a newly connected device
-        print("[INFO] receiving data from {}...".format(rpiName))
+        if rpiName not in lastActive.keys():
+        	print("[INFO] receiving data from {}...".format(rpiName))
 		# record the last active time for the device from which we just
 		# received a frame
-
+        lastActive[rpiName] = datetime.now()
+        print(frame)
         # 検出実施 #########################s####################################
         if len(frame) == 0:
             break
@@ -162,6 +166,24 @@ def main():
         print(time)
         # キー処理(ESC：終了) #################################################
 
+
+		# update the new frame in the frame dictionary
+        frameDict[rpiName] = frame
+
+		# if current time *minus* last time when the active device check
+		# was made is greater than the threshold set then do a check
+        if (datetime.now() - lastActiveCheck).seconds > ACTIVE_CHECK_SECONDS:
+			# loop over all previously active devices
+            for (rpiName, ts) in list(lastActive.items()):
+				# remove the RPi from the last active and frame
+				# dictionaries if the device hasn't been active recently
+                if (datetime.now() - ts).seconds > ACTIVE_CHECK_SECONDS:
+                    print("[INFO] lost connection to {}".format(rpiName))
+                    lastActive.pop(rpiName)
+                    frameDict.pop(rpiName)
+
+		# set the last active check time as current time
+        lastActiveCheck = datetime.now()
 
 		##############################################################
         ##cv.imshow('MediaPipe Holistic Demo', debug_image)
