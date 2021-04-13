@@ -14,28 +14,7 @@ import mediapipe as mp
 from utils import CvFpsCalc
 import matplotlib.pyplot as plt
 import getch
-from pynput import keyboard
 
-def on_press(key):
-    try:
-        print('Alphanumeric key pressed: {0} '.format(
-            key.char))
-    except AttributeError:
-        print('special key pressed: {0}'.format(
-            key))
-
-def on_release(key):
-    print('Key released: {0}'.format(
-        key))
-    if key == keyboard.Key.esc:
-        # Stop listener
-        return False
-
-# Collect events until released
-with keyboard.Listener(
-        on_press=on_press,
-        on_release=on_release) as listener:
-    listener.join()
 
 # initialize the ImageHub object
 imageHub = imagezmq.ImageHub(open_port='tcp://201.159.223.253:5558')
@@ -183,8 +162,8 @@ def main():
         time = time + 1
         print(time)
         # キー処理(ESC：終了) #################################################
-        char = getch.getch()
-        if char == 'q':
+        input = raw_input('prompt')
+        if input == 'q':
             break
 
 
