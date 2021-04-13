@@ -857,7 +857,7 @@ def main():
             lastActiveCheck = datetime.now()
 
 		    ##############################################################
-            cv.imshow('MediaPipe Holistic Demo', debug_image)
+            #cv.imshow('MediaPipe Holistic Demo', debug_image)
 			## TERMINA
     ##Creating an array for plot
     if len(R_hand_landmarks) > 0 or len(L_hand_landmarks):
