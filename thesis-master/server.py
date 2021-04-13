@@ -161,8 +161,8 @@ def main():
         time = time + 1
         print(time)
         # キー処理(ESC：終了) #################################################
-        key = cv.waitKey(1)
-        if key == 27:  # ESC
+        char = getch.getch()
+        if char == 'q':
             break
 
 		# update the new frame in the frame dictionary
