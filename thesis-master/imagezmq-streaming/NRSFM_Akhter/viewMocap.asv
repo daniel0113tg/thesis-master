@@ -1,0 +1,42 @@
+function viewMocap(S, Shat, list)
+
+F = size(S, 1)/3;
+
+for i=1: F
+    
+    Si = [Sh1(3*i-2, :); Sh1(3*i-1, :); Sh1(3*i, :)];
+%     plot3(Sh1(3*i-2, :), Sh1(3*i-1, :), Sh1(3*i, :), 'g.', 'MarkerSize', 15, 'Color', [100 200 255]/255);
+    plot3(Sh1(3*i-2, :), Sh1(3*i-1, :), Sh1(3*i, :), 'g.', 'MarkerSize', 15);
+%     drawLines3(Sh1(3*i-2:3*i, :), DinosaurTri);
+%     drawLines3(Sh1(3*i-2:3*i, :), MRtri);
+    drawLines3(Sh1(3*i-2:3*i, :), 3);
+%     drawLines3(Sh1(3*i-2:3*i, :), SimonList);
+    axis equal off vis3d
+    
+    if exist('cva')
+        subplot(h1), campos(cpos); camtarget(ctar); camup(cup); camva(cva);
+    else
+        [cpos, ctar, cup, cva] = adjustView(h1);
+    end;
+    
+    h2 = subplot('position', [0.55, 0.15, 0.4, 0.4]);
+%     plot3(Sh1(3*i-2, :), Sh1(3*i-1, :), Sh1(3*i, :), 'b.', 'MarkerSize', 15, 'Color', [100 200 255]/255);
+    plot3(Sh1(3*i-2, :), Sh1(3*i-1, :), Sh1(3*i, :), 'g.', 'MarkerSize', 15);
+    
+%     drawLines3(Sh1(3*i-2:3*i, :), DinosaurTri);
+%     drawLines3(Sh1(3*i-2:3*i, :), MRtri);
+    drawLines3(Sh1(3*i-2:3*i, :), 3);
+%     drawLines3(Sh1(3*i-2:3*i, :), SimonList);
+    axis equal off vis3d
+
+    if exist('cva2')
+        subplot(h2), campos(cpos2); camtarget(ctar2); camup(cup2); camva(cva2);
+    else
+        [cpos2, ctar2, cup2, cva2] = adjustView(h2);
+    end;
+    
+%     pause
+    
+    img = frame2im(getframe(gcf));
+    imwrite(img, sprintf('%s//%04d.jpeg', outPath, i), 'Quality', 95);
+end;

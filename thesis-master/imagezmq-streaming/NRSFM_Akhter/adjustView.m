@@ -1,0 +1,79 @@
+function [cpos, ctar, cup, cva] = adjustView(h)
+% This function adjusts the camera parameters of the 3D scnece by taking
+% user input. And then returns the camera parameters. User can move the 
+% camera horizontally or vertically, zoom in or out, pan or tilt and 
+% camera roll using key board keys. Following is the detail of keys and 
+% corresponding action.
+%
+% Press i for zoom in
+% Press o for zoom out
+% Press left(right) arrow for horizaontal camera movement
+% Press Up(down) arrow for vertical camera movement
+% Press u(d)  for camera roll clock(anticllock) wise
+% Press u(d)  for camera roll clock(anticllock) wise
+% Press j(k)  for camera pan
+% Press l(m)  for camera tilt
+% Press Esc when you are done
+
+num = -1;
+dth = 5;
+dph = 5;
+dphsi = 5;
+dt = 0.25;
+dp = 0.25;
+camtarget([0 0 0]);
+while num~=27               % while escape pressed
+    [x y num] = ginput(1);
+
+    switch num
+        case 28             % Left arrow
+            camorbit(dth, 0, 'data');     % Horizontal rotation
+        case 29             % Right arrow
+            camorbit(-dth, 0, 'data');
+        case 30             % Up arrow
+            camorbit(0, dph, 'data');     % Vertical Rotation
+        case 31             % Down arrow
+            camorbit(0, -dph, 'data');
+        case 105            % i pressed
+            if camva <= 1
+                ;
+            else
+                camva(camva-0.5); % Zoom in
+            end;
+        case 106            % j pressed
+            campan(dt, 0, 'data');
+        case 107            % k pressed
+            campan(-dt, 0, 'data');
+        case 108            % l pressed
+            campan(0, dp, 'data');
+        case 109            % m pressed
+            campan(0, -dp, 'data');
+        case 111            % o pressed
+            if camva >= 179
+                ;
+            else
+                camva(camva+0.5); % Zoom Out
+            end
+        case 117            % u pressed
+            camroll(dphsi);
+        case 100            % d pressed
+            camroll(-dphsi);
+    end;
+    cpos = campos;
+    ctar = camtarget;
+    cup = camup;
+    cva = camva;
+    if exist('h')
+        for j=1:length(h)
+            subplot(h(j))
+            campos(cpos);
+            camtarget(ctar);
+            camup(cup);
+            camva(cva);
+        end
+    end;
+end;
+% cpos = campos;
+% ctar = camtarget;
+% cup = camup;
+% cva = camva;
